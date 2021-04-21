@@ -53,7 +53,7 @@ class SwitchValidation {
           initialTimestamp: initialState.switch.timestamp,
           updatedState: updatedState.switch.value,
           updatedTimestamp: updatedState.switch.timestamp,
-          command: switchMap[onOff],
+          command: `${switchMap[onOff]}()`,
           passed: true
         };
 

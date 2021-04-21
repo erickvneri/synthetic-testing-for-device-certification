@@ -6,7 +6,7 @@ function Navbar(props) {
   return (
     <nav className='navbar' role='navigation' aria-label='main navigation'>
       <a className='navbar-item'
-        href="https://community.smartthings.com/c/developer-programs">
+        href='http://localhost:3000'>
         <img src="https://aws1.discourse-cdn.com/smartthings/original/3X/8/0/806ef827c63fed709436f7b08671bd8edd9ee4f3.png"
              alt="SmartThings Logo" />
       </a>

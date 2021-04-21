@@ -74,7 +74,7 @@ function CapabilityValidation(props) {
     const csvHeader = Object.keys(testCases[0]).join(',');
     const csvBody = testCases.map((testCase) => Object.values(testCase).join(","));
     const csvBuffer = `{${csvHeader}${csvBody}}`;
-    const filePath = `device-capability-certification${new Date().toISOString()}.csv`;
+    //const filePath = `device-capability-certification${new Date().toISOString()}.csv`;
     console.log(csvBuffer);
   }
 

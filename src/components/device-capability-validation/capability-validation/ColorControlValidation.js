@@ -3,7 +3,6 @@ class ColorControlValidation {
     this.deviceId = deviceId;
     this.component = component;
     this.apiClient = apiClient;
-    this.commands = ['setColor', 'setHue', 'setSaturation'];
   }
 
   getStateUpdate() {
@@ -49,17 +48,18 @@ class ColorControlValidation {
       };
       for(let setter of ['setHue', 'setSaturation']){
         for (let argStep of argumentSteps) {
-          let commandResponse = await this.sendCommand('setHue', argStep);
+          let commandResponse = await this.sendCommand(setter, argStep);
           updatedState = await this.getStateUpdate();
+          console.log(updatedState);
 
           testCase = {
             component: this.component,
             capability: 'colorControl',
-            initialState: initialState.hue.value,
-            initialTimestamp: initialState.hue.timestamp,
-            updatedState: updatedState.hue.value,
-            updatedTimestamp: updatedState.hue.timestamp,
-            command: setter,
+            initialState: initialState[cmdAttrMapper[setter]].value,
+            initialTimestamp: initialState[cmdAttrMapper[setter]].timestamp,
+            updatedState: updatedState[cmdAttrMapper[setter]].value,
+            updatedTimestamp: updatedState[cmdAttrMapper[setter]].timestamp,
+            command: `${setter}(${argStep})`,
             passed: true
           };
           if (commandResponse.status === 'success') {
@@ -81,14 +81,15 @@ class ColorControlValidation {
       for (let color of ['red', 'green', 'blue']) {
         let commandResponse = await this.sendCommand('setColor', { color: color });
         updatedState = await this.getStateUpdate();
+        console.log(updatedState)
         testCase = {
           component: this.component,
           capability: 'colorControl',
-          initialState: initialState.hue.value,
-          initialTimestamp: initialState.hue.timestamp,
-          updatedState: updatedState.hue.value,
-          updatedTimestamp: updatedState.hue.timestamp,
-          command: 'setColor',
+          initialState: initialState.color.value,
+          initialTimestamp: initialState.color.timestamp,
+          updatedState: updatedState.color.value,
+          updatedTimestamp: updatedState.color.timestamp,
+          command: `setColor("${color}")`,
           passed: true
         };
         if (commandResponse.status === 'success') {

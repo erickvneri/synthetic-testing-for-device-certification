@@ -21,23 +21,37 @@ function OAuthButton(props) {
   const authorizeButton = (
       <button
         className='button is-primary is-medium'
-        id='navbarBtn'
+        id='navbar-button'
         onClick={oauthService.authorizeClient}>
         Authorize
       </button>);
+
+  const signOutCallback = () => {
+    /*
+      * Clear accessToken and redirect
+      * to Home.
+      * */
+    props.setToken(null);
+    props.redirect('/');
+  }
 
   // Template for props.accessToken === true
   const isAuthorizedMsg = (
     <div className='navbar-item'>
       <p
         className='navbar-item'>
-        Client Authorized
+        Authorized
       </p>
       <button
         className='button is-primary is-medium'
-        id='navbarBtn'
+        id='navbar-button'
         onClick={() => props.redirect('/devicesList')}>
         Get Started
+      </button>
+      <button
+        className='button is-light is-medium'
+        onClick={signOutCallback}>
+        Sign Out
       </button>
     </div>);
 
@@ -50,12 +64,9 @@ function OAuthButton(props) {
         .then(res => props.setToken(res.data.access_token))
         .catch(err => console.log(err));
       props.redirect('/');
-      //return isAuthorizedMsg;
     }
   }
-  //else {
-      return isAuthorizedMsg;
-  //}
+  return isAuthorizedMsg;
 }
 
 export default OAuthButton;
