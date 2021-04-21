@@ -1,0 +1,38 @@
+// Community colors
+$navbarFont: #e3e7ea;
+$navbarBg: #333;
+$navbarBtn: #0077c8;
+
+// Import only what you need from Bulma
+@import '../node_modules/bulma/sass/utilities/_all.sass';
+@import '../node_modules/bulma/sass/base/_all.sass';
+@import '../node_modules/bulma/sass/elements/button.sass';
+@import '../node_modules/bulma/sass/elements/container.sass';
+@import '../node_modules/bulma/sass/elements/form.sass';
+@import '../node_modules/bulma/sass/elements/title.sass';
+@import '../node_modules/bulma/sass/elements/table.sass';
+@import '../node_modules/bulma/sass/components/navbar.sass';
+@import '../node_modules/bulma/sass/layout/hero.sass';
+@import '../node_modules/bulma/sass/layout/section.sass';
+@import '../node_modules/bulma/sass/grid/columns.sass';
+
+.navbar {
+  background-color: $navbarBg;
+  height: 80px;
+}
+
+.navbar-item {
+  color: $navbarFont;
+  font-size: 25px;
+  margin: 10px;
+}
+
+#navbarBtn {
+  background-color: $navbarBtn;
+  color: $navbarFont;
+}
+
+.table {
+  margin-left: auto;
+  margin-right: auto;
+}

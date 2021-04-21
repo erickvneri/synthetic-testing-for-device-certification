@@ -1,0 +1,16 @@
+{
+    "appName": "smartthings-device-capability-certification",
+    "appType": "API_ONLY",
+    "principalType": "LOCATION",
+    "classifications": [
+        "CONNECTED_SERVICE"
+    ],
+    "displayName": "smartthings-device-capability-certification",
+    "description": "Description",
+    "singleInstance": false,
+    "installMetadata": {
+        "certified": "false",
+        "maxInstalls": "500"
+    },
+    "apiOnly": {}
+}

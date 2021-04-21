@@ -1,0 +1,21 @@
+{
+    "clientName": "device-capability-certification",
+    "scope": [
+        "r:locations:*",
+        "r:devices:$",
+        "r:scenes:*",
+        "w:rules:*",
+        "x:scenes:*",
+        "r:rules:*",
+        "x:devices:*",
+        "w:devices:$",
+        "w:locations:*",
+        "r:devices:*",
+        "w:devices:*",
+        "x:locations:*",
+        "x:devices:$"
+    ],
+    "redirectUris": [
+        "<https://ngork.url.example>/oauth"
+    ]
+}
