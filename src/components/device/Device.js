@@ -24,15 +24,20 @@ function Device(props) {
     Axios(options)
       .then(res => setDevice(res.data))
       .catch(err => alert('API Error', err))
-  }, [device]);
+  }, [setDevice]);
 
   return (
     <section className='container is-mobile'>
-      <button onClick={() => props.redirect(`/deviceCertification?deviceId=${deviceId}`)}>Button!</button>
-      <DeviceInfo
-        deviceInfo={device} />
-      <DeviceCapabilityInfo
-        componentInfo={device.components} />
+      <button className='button is-success'
+        onClick={() => props.redirect(`/deviceCertification?deviceId=${deviceId}`)}>
+          Run Tests
+      </button>
+      <div className='level'>
+        <DeviceInfo
+          deviceInfo={device} />
+        <DeviceCapabilityInfo
+          componentInfo={device.components} />
+      </div>
     </section>
   )
 }

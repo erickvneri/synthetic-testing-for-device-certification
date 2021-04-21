@@ -1,9 +1,8 @@
-class SwitchLevelCertification {
+class SwitchLevelValidation {
   constructor(deviceId, component, apiClient) {
     this.deviceId = deviceId;
     this.component = component;
     this.apiClient = apiClient;
-    this.levelSteps = [0, 50, 100];
   }
 
   getStateUpdate() {
@@ -30,54 +29,51 @@ class SwitchLevelCertification {
     return deviceCommand();
   }
 
-  certificateCapability() {
-    const certCallback = async () => {
-      let initialState = await this.getStateUpdate();
-      let updatedState;
-      let successCommands = 0;
-      let failCommands = 0;
+  validateCapability() {
+    const validationCallback = async () => {
+      const testCollection = [];
+      let testCase;
 
-      for (let levelStep of this.levelSteps) {
+      let initialState = await this.getStateUpdate();
+      let updatedState = initialState;
+
+      for (let levelStep of [0, 50, 100]) {
         let levelStepCommand = await this.sendCommand(levelStep);
         if (levelStepCommand.status == 'success') {
           updatedState = await this.getStateUpdate();
-          console.log(updatedState.level.value);
-          console.log(levelStep);
+            testCase = {
+              component: this.component,
+              capability: 'switchLevel',
+              initialState: initialState.level.value,
+              initialTimestamp: initialState.level.timestamp,
+              updatedState: updatedState.level.value,
+              updatedTimestamp: updatedState.level.timestamp,
+              command: `setLevel(${levelStep})`,
+              passed: true
+            };
+
           if (updatedState.level.value == levelStep) {
-            successCommands++;
+            testCollection.push(testCase);
           }
           else {
             // If command is successful
             // at API level, but values
             // are not being updated.
-            failCommands++;
+            testCase.passed = false;
+            testCollection.push(testCase);
           }
         }
         // If command failed
         else {
-          failCommands++;
+          testCase.passed = false;
+          testCollection.push(testCase);
         }
       }
 
-      let testResult = {
-        component: this.component,
-        capability: 'switchLevel',
-        initialState: initialState.level.value,
-        initialTimestamp: initialState.level.timestamp,
-        updatedState: updatedState.level.value,
-        updatedTimestamp: updatedState.level.timestamp,
-        successCommands: successCommands,
-        failCommands: failCommands,
-        isCertified: true
-      }
-      if (successCommands != 3) {
-        testResult.isCertified = false;
-        return testResult;
-      }
-      return testResult;
+      return testCollection;
     }
-    return certCallback();
+    return validationCallback();
   }
 }
 
-export default SwitchLevelCertification;
+export default SwitchLevelValidation;

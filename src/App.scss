@@ -12,13 +12,15 @@ $navbarBtn: #0077c8;
 @import '../node_modules/bulma/sass/elements/title.sass';
 @import '../node_modules/bulma/sass/elements/table.sass';
 @import '../node_modules/bulma/sass/components/navbar.sass';
-@import '../node_modules/bulma/sass/layout/hero.sass';
-@import '../node_modules/bulma/sass/layout/section.sass';
-@import '../node_modules/bulma/sass/grid/columns.sass';
+@import '../node_modules/bulma/sass/components/level.sass';
 
 .navbar {
   background-color: $navbarBg;
   height: 80px;
+}
+
+.navbar-item img {
+  max-height: 2.75rem;
 }
 
 .navbar-item {

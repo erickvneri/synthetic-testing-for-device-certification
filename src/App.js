@@ -9,7 +9,7 @@ import OAuthButton from './components/OAuthButton';
 import Home from './components/Home';
 import DevicesList from './components/device/DevicesList';
 import Device from './components/device/Device';
-import Certification from './components/certification/Certification';
+import DeviceCapabilityValidation from './components/device-capability-validation/DeviceCapabilityValidation';
 
 function App() {
   const [accessToken, setToken] = useState(env.PAT ? env.PAT : null);
@@ -55,10 +55,10 @@ function App() {
             redirect={redirect}/>}>
         </Route>
 
-        {/* Device Certification */}
+        {/* Device Capability Validation */}
         <Route
           exact path='/deviceCertification'
-          render={() => <Certification
+          render={() => <DeviceCapabilityValidation
             redirect={redirect}
             apiClient={apiClient}/>}>
         </Route>

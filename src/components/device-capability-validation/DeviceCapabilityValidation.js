@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import '../../App.scss';
 
-import DeviceCertification from './DeviceCertification';
+import DeviceValidation from './device-validation/DeviceValidation';
 
-function Certification(props) {
+function DeviceCapabilityValidation(props) {
   const [device, setDevice] = useState({});
   const [deviceId, setDeviceId] = useState(
       new URLSearchParams(
@@ -21,21 +21,21 @@ function Certification(props) {
 
   return (
     <section className='container is-mobile'>
-      <p className='title is-2'>{device.label}</p>
-      <p className='subtitle is-4'>{device.deviceId}</p>
+          <p className='title is-1'>{device.label}</p>
+          <p className='subtitle is-4'>{device.deviceId}</p>
       <table className='table is-bordered'>
         <thead>
+          <th>Test</th>
           <th>Component</th>
           <th>Capability</th>
           <th>Initial State</th>
           <th>Initial Timestamp</th>
-          <th>Successful Commands</th>
-          <th>Failed Commands</th>
+          <th>Command</th>
           <th>Updated State</th>
           <th>Updated Timestamp</th>
           <th>Result</th>
         </thead>
-        <DeviceCertification
+        <DeviceValidation
           device={device}
           apiClient={props.apiClient} />
       </table>
@@ -43,4 +43,4 @@ function Certification(props) {
   )
 }
 
-export default Certification;
+export default DeviceCapabilityValidation;
