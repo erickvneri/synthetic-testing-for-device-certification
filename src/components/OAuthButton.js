@@ -50,9 +50,9 @@ function OAuthButton(props) {
       return authorizeButton;
     }
     else if (authCode){
-      oauthService.getToken(authCode)
-        .then(res => props.setToken(res.data.access_token))
-        .catch(err => console.log(err));
+      let tokenResponse = oauthService.getToken(authCode)
+      console.log(tokenResponse.data);
+      //localStorage.setItem('accessToken', tokenResponse.access_token);
       props.redirect('/');
     }
   }

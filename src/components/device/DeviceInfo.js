@@ -5,7 +5,7 @@ function DeviceInfo(props) {
     return <h2>Loading Device Information...</h2>
   }
   return (
-    <table className='table is-bordered'>
+    <table className='table is-bordered' id='device-info-table'>
       <thead>
         <th colSpan='2' align='center'>Device Information</th>
       </thead>

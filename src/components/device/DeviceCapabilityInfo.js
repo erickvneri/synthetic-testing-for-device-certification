@@ -6,7 +6,7 @@ function DeviceComponent(props) {
   };
 
   return (
-    <tbody>
+      <tbody>
       <tr align='center'>
         <td>Component</td>
         <td>Capability</td>
@@ -14,8 +14,7 @@ function DeviceComponent(props) {
       {props.componentInfo.map(component => {
         return (
           <tr>
-            <td
-              rowSpan={component.capabilities.lenght}>
+            <td>
               <strong>{component.id}</strong>
             </td>
             {component.capabilities.map(capability => {
@@ -34,7 +33,7 @@ function DeviceComponent(props) {
 
 function DeviceCapabilityInfo(props) {
   return (
-    <table className='table is-bordered'>
+    <table className='table is-bordered' id='table-cap-detail'>
       <thead>
         <th colSpan='2' align='center'>Capability Information</th>
       </thead>

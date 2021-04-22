@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
+import CSVDownloader from 'react-csv-downloader';
 
 import SwitchValidation from '../capability-validation/SwitchValidation';
 import SwitchLevelValidation from '../capability-validation/SwitchLevelValidation';
 import ColorControlValidation from '../capability-validation/ColorControlValidation';
+
+import ToCSVButton from '../../buttons/toCSVButton';
 
 function CapabilityValidation(props) {
   const [testCases, setTestCase] = useState([]);
@@ -70,14 +73,6 @@ function CapabilityValidation(props) {
       }
   }, [props]);
 
-  const parseToCSV = async () => {
-    const csvHeader = Object.keys(testCases[0]).join(',');
-    const csvBody = testCases.map((testCase) => Object.values(testCase).join(",")).join('n');
-    const csvBuffer = `{${csvHeader}${csvBody}}`;
-    ////const filePath = `device-capability-certification${new Date().toISOString()}.csv`;
-    //console.log(csvBuffer);
-  }
-
   const testResultMapping = (testResult) => {
     const map = { true: 'Passed', false: 'Failed' }
     return map[testResult];
@@ -85,30 +80,44 @@ function CapabilityValidation(props) {
 
   return (
     <>
+      <section className='buttons are-medium'>
+        {/* Export Results to .csv file */}
+        <ToCSVButton className='button' testCases={testCases} />
+        {/* Refresh Window to Restart Tests */}
+        <button className='button' onClick={() => window.location.reload()}>
+          Run again
+        </button>
+      </section>
+
+      <table className='table is-bordered' id='test-result-table'>
+        <thead>
+          <th>Test</th>
+          <th>Component</th>
+          <th>Capability</th>
+          <th>Initial State</th>
+          <th>Initial Timestamp</th>
+          <th>Command</th>
+          <th>Updated State</th>
+          <th>Updated Timestamp</th>
+          <th>Result</th>
+        </thead>
       {testCases.map((test, testId) => {
-        //console.log(test)
+        test.id = (testId + 1);
         return (
           <tbody>
-            <td>{testId + 1}</td>
+            <td>{test.id}</td>
             <td>{test.component}</td>
             <td>{test.capability}</td>
-            <td>{test.initialState}</td>
+            <td>{''+test.initialState}</td>
             <td>{test.initialTimestamp}</td>
             <td>{test.command}</td>
-            <td>{test.updatedState}</td>
+            <td>{''+test.updatedState}</td>
             <td>{test.updatedTimestamp}</td>
             <td>{testResultMapping(test.passed)}</td>
           </tbody>
         )
       })}
-      <section className='level-right'>
-        <button className='button is-warning' onClick={parseToCSV} download>
-          Download Results
-        </button>
-        <button className='button is-success' onClick={() => window.location.reload()}>
-          Run tests again
-        </button>
-      </section>
+      </table>
     </>
   )
 }

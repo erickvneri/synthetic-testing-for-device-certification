@@ -6,9 +6,7 @@ import DeviceValidation from './device-validation/DeviceValidation';
 function DeviceCapabilityValidation(props) {
   const [device, setDevice] = useState({});
   const [deviceId, setDeviceId] = useState(
-      new URLSearchParams(
-        window.location.search
-      ).get('deviceId')
+    new URLSearchParams(window.location.search).get('deviceId')
   );
 
   useEffect(() => {
@@ -17,30 +15,17 @@ function DeviceCapabilityValidation(props) {
       setDevice(deviceResponse);
     };
     fetchDevice();
-  }, [setDevice]);
+  }, [deviceId]);
 
   return (
+
     <section className='container is-mobile'>
-          <p className='title is-1'>{device.label}</p>
-          <p className='subtitle is-4'>{device.deviceId}</p>
-      <table className='table is-bordered'>
-        <thead>
-          <th>Test</th>
-          <th>Component</th>
-          <th>Capability</th>
-          <th>Initial State</th>
-          <th>Initial Timestamp</th>
-          <th>Command</th>
-          <th>Updated State</th>
-          <th>Updated Timestamp</th>
-          <th>Result</th>
-        </thead>
-        <DeviceValidation
+      <p className='title is-3'>{device.label}</p>
+       <p className='subtitle is-4'>{device.deviceId}</p>
+      <DeviceValidation
           device={device}
           apiClient={props.apiClient} />
-      </table>
     </section>
-  )
-}
+  )}
 
 export default DeviceCapabilityValidation;

@@ -14,6 +14,7 @@ $table-row-hover-background-color: #969696;
 @import '../node_modules/bulma/sass/elements/table.sass';
 @import '../node_modules/bulma/sass/components/navbar.sass';
 @import '../node_modules/bulma/sass/components/level.sass';
+@import '../node_modules/bulma/sass/layout/footer.sass';
 
 .navbar {
   background-color: $navbarBg;
@@ -54,14 +55,56 @@ a.navbar-item:hover {
 #in-page-title {
   margin-bottom: 1.5rem;
   margin-top: 1.5rem;
-  margin-inline: 5.5rem;
+  margin-left: 10rem;
+}
+
+// Device Info Table
+#device-info-table {
+  width: 568px;
+}
+
+.container.is-mobile {
+  text-align: left;
+}
+
+.table.is-hoverable {
+  width: 1029px;
+}
+
+.table th {
+  width: 205px;
+  height: 40px;
+}
+
+#device-select {
+  cursor: pointer;
+}
+
+div.level {
+  padding-inline: 152px;
+  padding-top: 10px;
+}
+
+.level div {
+  align-self: start;
+  text-align: center;
 }
 
 .table {
   margin-left: auto;
   margin-right: auto;
+  text-align: initial;
 }
 
-#device-select {
-  cursor: pointer;
+.buttons.are-medium {
+  margin-left: -10px;
+}
+
+#test-result-table {
+  width: 1343px;
+}
+
+#test-result-table th {
+  width: 175px;
+  height: 63px;
 }

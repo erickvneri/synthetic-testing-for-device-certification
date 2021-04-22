@@ -8,9 +8,5 @@
     "displayName": "smartthings-device-capability-certification",
     "description": "Description",
     "singleInstance": false,
-    "installMetadata": {
-        "certified": "false",
-        "maxInstalls": "500"
-    },
     "apiOnly": {}
 }

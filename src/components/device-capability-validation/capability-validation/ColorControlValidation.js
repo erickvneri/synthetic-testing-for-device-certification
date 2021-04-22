@@ -54,24 +54,22 @@ class ColorControlValidation {
           testCase = {
             component: this.component,
             capability: 'colorControl',
-            initialState: initialState[cmdAttrMapper[setter]].value,
+            initialState: String(initialState[cmdAttrMapper[setter]].value),
             initialTimestamp: initialState[cmdAttrMapper[setter]].timestamp,
-            updatedState: updatedState[cmdAttrMapper[setter]].value,
+            updatedState: String(updatedState[cmdAttrMapper[setter]].value),
             updatedTimestamp: updatedState[cmdAttrMapper[setter]].timestamp,
             command: `${setter}(${argStep})`,
             passed: true
           };
-          if (commandResponse.status === 'success') {
-            if (updatedState[cmdAttrMapper[setter]].value === argStep) {
-              testCollection.push(testCase);
-            } else {
-              testCase.passed = false;
-              testCollection.push(testCase);
-            }
-            initialState = updatedState;
+          if (commandResponse.status !== 'success') {
+            testCase.passed = false;
           }
+          if (updatedState[cmdAttrMapper[setter]].value != argStep) {
+            testCase.passed = false;
+          }
+          initialState = updatedState;
+          testCollection.push(testCase);
         };
-
       }
 
       /*
@@ -83,22 +81,21 @@ class ColorControlValidation {
         testCase = {
           component: this.component,
           capability: 'colorControl',
-          initialState: initialState.color.value,
+          initialState: String(initialState.color.value),
           initialTimestamp: initialState.color.timestamp,
-          updatedState: updatedState.color.value,
+          updatedState: String(updatedState.color.value),
           updatedTimestamp: updatedState.color.timestamp,
           command: `setColor("${color}")`,
           passed: true
         };
-        if (commandResponse.status === 'success') {
-          if (updatedState.color.value === color) {
-            testCollection.push(testCase);
-          } else {
-            testCase.passed = false;
-            testCollection.push(testCase);
-          }
-          initialState = updatedState;
+        if (commandResponse.status !== 'success') {
+          testCase.passed = false;
         }
+        if (updatedState.color.value !== color) {
+          testCase.passed = false;
+        }
+        initialState = updatedState;
+        testCollection.push(testCase);
       }
       return testCollection;
     }

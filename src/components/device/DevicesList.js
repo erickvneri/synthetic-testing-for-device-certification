@@ -1,63 +1,59 @@
 import { useEffect, useState } from 'react';
 
 import '../../App.scss';
-import Axios from 'axios';
+
+function DevicesHeader() {
+  return (
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Label</th>
+        <th>Manufacturer</th>
+        <th>Components</th>
+      </tr>
+    </thead>
+  )
+}
 
 function DevicesList(props) {
   const [devices, setDevices] = useState([]);
 
   useEffect(() => {
-    // This API Call must be moved to an
-    // APIClient class that handles Http
-    // Requests.
-    const options = {
-        url: 'https://api.smartthings.com/v1/devices',
-        headers: {
-          'Authorization': `Bearer ${props.accessToken}`
-        }
-      }
-    Axios(options)
-      .then(res => setDevices(res.data.items))
-      .catch(err => console.log(err))
-  }, [typeof devices]);
+    if (props.apiClient) {
+      props.apiClient.devices.list()
+        .then(devices => setDevices(devices))
+        .catch(err => console.log(err));
+    }
+  }, [props]);
 
-  if(props.accessToken){
-    return (
-      <section className='container is-mobile'>
-        <h2 id='in-page-title' className='title'>Select device</h2>
-        <table className='table is-bordered is-hoverable'>
-          <thead>
-            <tr>
-              <th>Type</th>
-              <th>Name</th>
-              <th>Label</th>
-              <th>Manufacturer</th>
-              <th>Components</th>
-            </tr>
-          </thead>
-          <tbody>
-            {devices
-              .sort((a,b) => (a.type < b.type) ? -1 : 1)
-              .map(device => {
-              return (
-                <tr onClick={() => props.redirect(`/device?deviceId=${device.deviceId}`)}>
-                  <td id='device-select'>{device.type}</td>
-                  <td id='device-select'>{device.name}</td>
-                  <td id='device-select'>{device.label}</td>
-                  <td id='device-select'>{device.manufacturerName}</td>
-                  <td id='device-select'>{device.components
-                    .map(comp => comp.id)
-                    .join(', ')}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </section>
-    )
+  if (!devices) {
+     return <p>Loading devices...</p>
   }
   return (
-    prompt('Access Error', 'User must authenticate first', props.redirect('/'))
+    <section className='container is-mobile'>
+      <p id='in-page-title' className='title is-3'>Select device</p>
+      <table className='table is-bordered is-hoverable'>
+        <DevicesHeader />
+        <tbody>
+          {devices
+            .sort((a,b) => (a.type < b.type) ? -1 : 1)
+            .map(device => {
+            return (
+              <tr onClick={() => props.redirect(`/device?deviceId=${device.deviceId}`)}>
+                <td id='device-select'>{device.type}</td>
+                <td id='device-select'>{device.name}</td>
+                <td id='device-select'>{device.label}</td>
+                <td id='device-select'>{device.manufacturerName}</td>
+                <td id='device-select'>{device.components
+                  .map(comp => comp.id)
+                  .join(', ')}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </section>
   )
 }
 
