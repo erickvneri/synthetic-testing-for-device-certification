@@ -50,7 +50,6 @@ class ColorControlValidation {
         for (let argStep of argumentSteps) {
           let commandResponse = await this.sendCommand(setter, argStep);
           updatedState = await this.getStateUpdate();
-          console.log(updatedState);
 
           testCase = {
             component: this.component,
@@ -81,7 +80,6 @@ class ColorControlValidation {
       for (let color of ['red', 'green', 'blue']) {
         let commandResponse = await this.sendCommand('setColor', { color: color });
         updatedState = await this.getStateUpdate();
-        console.log(updatedState)
         testCase = {
           component: this.component,
           capability: 'colorControl',

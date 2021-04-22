@@ -41,11 +41,11 @@ function DevicesList(props) {
               .map(device => {
               return (
                 <tr onClick={() => props.redirect(`/device?deviceId=${device.deviceId}`)}>
-                  <td>{device.type}</td>
-                  <td>{device.name}</td>
-                  <td>{device.label}</td>
-                  <td>{device.manufacturerName}</td>
-                  <td>{device.components
+                  <td id='device-select'>{device.type}</td>
+                  <td id='device-select'>{device.name}</td>
+                  <td id='device-select'>{device.label}</td>
+                  <td id='device-select'>{device.manufacturerName}</td>
+                  <td id='device-select'>{device.components
                     .map(comp => comp.id)
                     .join(', ')}</td>
                 </tr>

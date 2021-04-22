@@ -12,7 +12,8 @@ import Device from './components/device/Device';
 import DeviceCapabilityValidation from './components/device-capability-validation/DeviceCapabilityValidation';
 
 function App() {
-  const [accessToken, setToken] = useState(env.PAT ? env.PAT : null);
+  //const [accessToken, setToken] = useState(env.PAT ? env.PAT : null);
+  const [accessToken, setToken] = useState(null);
   const redirect = useHistory().push;
   const apiClient = new SmartThingsClient(new BearerTokenAuthenticator(accessToken));
 

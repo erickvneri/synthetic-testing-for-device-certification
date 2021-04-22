@@ -38,16 +38,6 @@ function OAuthButton(props) {
   // Template for props.accessToken === true
   const isAuthorizedMsg = (
     <div className='navbar-item'>
-      <p
-        className='navbar-item'>
-        Authorized
-      </p>
-      <button
-        className='button is-primary is-medium'
-        id='navbar-button'
-        onClick={() => props.redirect('/devicesList')}>
-        Get Started
-      </button>
       <button
         className='button is-light is-medium'
         onClick={signOutCallback}>

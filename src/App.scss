@@ -3,12 +3,13 @@ $navbarFont: #e3e7ea;
 $navbarBg: #333;
 $navbarBtn: #0077c8;
 
+$table-row-hover-background-color: #969696;
+
 // Import only what you need from Bulma
 @import '../node_modules/bulma/sass/utilities/_all.sass';
 @import '../node_modules/bulma/sass/base/_all.sass';
 @import '../node_modules/bulma/sass/elements/button.sass';
 @import '../node_modules/bulma/sass/elements/container.sass';
-@import '../node_modules/bulma/sass/elements/form.sass';
 @import '../node_modules/bulma/sass/elements/title.sass';
 @import '../node_modules/bulma/sass/elements/table.sass';
 @import '../node_modules/bulma/sass/components/navbar.sass';
@@ -21,13 +22,13 @@ $navbarBtn: #0077c8;
 
 // SmartThings Logo
 .navbar-item img {
-  max-height: 2.75rem;
+  max-height: 3.75rem;
 }
 
 // Navbar Items
 .navbar-item {
   color: $navbarFont;
-  font-size: 25px;
+  font-size: 23px;
   margin: 10px;
 }
 
@@ -41,7 +42,26 @@ $navbarBtn: #0077c8;
   color: $navbarFont;
 }
 
+a.navbar-item {
+  text-decoration: underline;
+}
+
+a.navbar-item:hover {
+  background-color: $navbarBg;
+  color: $navbarFont;
+}
+
+#in-page-title {
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  margin-inline: 5.5rem;
+}
+
 .table {
   margin-left: auto;
   margin-right: auto;
+}
+
+#device-select {
+  cursor: pointer;
 }

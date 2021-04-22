@@ -72,11 +72,16 @@ function CapabilityValidation(props) {
 
   const parseToCSV = async () => {
     const csvHeader = Object.keys(testCases[0]).join(',');
-    const csvBody = testCases.map((testCase) => Object.values(testCase).join(","));
+    const csvBody = testCases.map((testCase) => Object.values(testCase).join(",")).join('n');
     const csvBuffer = `{${csvHeader}${csvBody}}`;
-    //const filePath = `device-capability-certification${new Date().toISOString()}.csv`;
-    console.log(csvBuffer);
+    ////const filePath = `device-capability-certification${new Date().toISOString()}.csv`;
+    //console.log(csvBuffer);
   }
+
+  const testResultMapping = (testResult) => {
+    const map = { true: 'Passed', false: 'Failed' }
+    return map[testResult];
+  };
 
   return (
     <>
@@ -92,17 +97,17 @@ function CapabilityValidation(props) {
             <td>{test.command}</td>
             <td>{test.updatedState}</td>
             <td>{test.updatedTimestamp}</td>
-            <td>{"" + test.passed}</td>
+            <td>{testResultMapping(test.passed)}</td>
           </tbody>
         )
       })}
-      <section className='buttons'>
-        <button className='button is-warning' onClick={parseToCSV}>
+      <section className='level-right'>
+        <button className='button is-warning' onClick={parseToCSV} download>
           Download Results
         </button>
-        <buton className='button is-success' onClick={() => window.location.reload()}>
+        <button className='button is-success' onClick={() => window.location.reload()}>
           Run tests again
-        </buton>
+        </button>
       </section>
     </>
   )
