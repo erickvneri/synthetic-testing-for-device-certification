@@ -4,11 +4,11 @@
 
 1. Clone this repository running the following command:
 
-       git clone https://github.com/erickvneri/certification-of-device-capabilities.git
+       git clone https://github.com/erickvneri/synthetic-testing-for-device-certification.git
 
 2. To install the dependencies, follow the next sequence:
 
-       cd certification-of-device-capabilities/
+       cd synthetic-testing-for-device-certification/
        yarn install
 
 ### Environment Configuration
