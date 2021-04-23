@@ -43,15 +43,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "react-dotenv": {
-    "whiteList": [
-      "API_URL",
-      "OAUTH_AUTHORIZE",
-      "OAUTH_TOKEN",
-      "CLIENT_ID",
-      "CLIENT_SECRET",
-      "REDIRECT_URL"
-    ]
   }
 }

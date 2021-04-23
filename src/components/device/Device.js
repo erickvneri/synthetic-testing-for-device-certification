@@ -29,7 +29,7 @@ function Device(props) {
           <div>
             <button className='button is-medium'
               onClick={() => props.redirect(
-              `/validateDevice?deviceId=${deviceId}`)}>Run Tests
+              `/validate-device?deviceId=${deviceId}`)}>Run Tests
             </button>
           </div>
         </div>

@@ -1,32 +1,8 @@
-class ColorControlValidation {
+import CapabilityValidationBase from './CapabilityValidationBase';
+
+class ColorControlValidation extends CapabilityValidationBase {
   constructor(deviceId, component, apiClient) {
-    this.deviceId = deviceId;
-    this.component = component;
-    this.apiClient = apiClient;
-  }
-
-  getStateUpdate() {
-    const deviceState = async () => {
-      let colorControlState = await this.apiClient.devices.getCapabilityStatus(
-        this.deviceId, this.component, 'colorControl'
-      );
-      return await colorControlState;
-    };
-    return deviceState();
-  }
-
-  sendCommand(command, argument) {
-    const deviceCommand = async () => {
-      let switchLevelResponse = await this.apiClient.devices.executeCommand(
-        this.deviceId,
-        { component: this.component,
-          capability: 'colorControl',
-          command: command,
-          arguments: [argument]
-        });
-      return await switchLevelResponse;
-    }
-    return deviceCommand();
+    super(deviceId, component, apiClient, 'colorControl')
   }
 
   validateCapability() {
@@ -56,9 +32,9 @@ class ColorControlValidation {
             capability: 'colorControl',
             initialState: String(initialState[cmdAttrMapper[setter]].value),
             initialTimestamp: initialState[cmdAttrMapper[setter]].timestamp,
+            command: `${setter}(${argStep})`,
             updatedState: String(updatedState[cmdAttrMapper[setter]].value),
             updatedTimestamp: updatedState[cmdAttrMapper[setter]].timestamp,
-            command: `${setter}(${argStep})`,
             passed: true
           };
           if (commandResponse.status !== 'success') {

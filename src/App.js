@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 import { SmartThingsClient, BearerTokenAuthenticator } from '@smartthings/core-sdk';
 import env from 'react-dotenv';
 
 import Navbar from './components/Navbar';
-import OAuthButton from './components/OAuthButton';
 import Home from './components/Home';
 import DevicesList from './components/device/DevicesList';
 import Device from './components/device/Device';
@@ -13,15 +12,8 @@ import DeviceCapabilityValidation from './components/device-capability-validatio
 
 function App() {
   const [accessToken, setToken] = useState(env.PAT ? env.PAT : null);
-  //const [accessToken, setToken] = useState();
   const redirect = useHistory().push;
   const apiClient = new SmartThingsClient(new BearerTokenAuthenticator(accessToken));
-
-  useEffect(() => {
-    //setToken(localStorage.getItem('accessToken'));
-    //console.log('Token set')
-    //console.log(localStorage.getItem('accessToken'))
-  }, [setToken]);
 
   return (
     <>
@@ -39,17 +31,9 @@ function App() {
           component={Home}>
         </Route>
 
-        {/* OAuth */}
-        <Route
-          exact path='/oauth'
-          render={() => <OAuthButton
-            accessToken={accessToken}
-            redirect={redirect}/>}>
-        </Route>
-
         {/* Devices List */}
         <Route
-          exact path='/devicesList'
+          exact path='/devices-list'
           render={() => <DevicesList
             apiClient={apiClient}
             redirect={redirect}/>}>
@@ -65,7 +49,7 @@ function App() {
 
         {/* Device Capability Validation */}
         <Route
-          exact path='/validateDevice'
+          exact path='/validate-device'
           render={() => <DeviceCapabilityValidation
             redirect={redirect}
             apiClient={apiClient}/>}>

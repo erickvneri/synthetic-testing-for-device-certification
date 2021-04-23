@@ -33,6 +33,11 @@ $table-row-hover-background-color: #969696;
   margin: 10px;
 }
 
+#welcome-page {
+  margin-left: 340px;
+  margin-top: 85px;
+}
+
 // General Buttons
 .button {
   margin: 10px;
@@ -48,6 +53,11 @@ a.navbar-item {
 }
 
 a.navbar-item:hover {
+  background-color: $navbarBg;
+  color: $navbarFont;
+}
+
+a.navbar-item:visited {
   background-color: $navbarBg;
   color: $navbarFont;
 }

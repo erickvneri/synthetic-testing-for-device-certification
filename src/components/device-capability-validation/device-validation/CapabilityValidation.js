@@ -4,6 +4,7 @@ import CSVDownloader from 'react-csv-downloader';
 import SwitchValidation from '../capability-validation/SwitchValidation';
 import SwitchLevelValidation from '../capability-validation/SwitchLevelValidation';
 import ColorControlValidation from '../capability-validation/ColorControlValidation';
+import ColorTemperatureValidation from '../capability-validation/ColorTemperatureValidation';
 
 import ToCSVButton from '../../buttons/toCSVButton';
 
@@ -45,6 +46,17 @@ function CapabilityValidation(props) {
     ]);
   }
 
+  const colorTemperatureValidationCallback = async () => {
+    let service = new ColorTemperatureValidation(
+      props.deviceId, props.component, props.apiClient
+    );
+    const colorTemperatureTestCases = await service.validateCapability();
+
+    setTestCase((testCases) => [
+      ...testCases,
+      ...colorTemperatureTestCases
+    ]);
+  }
   /*
     * Hook that will evaluate
     * the capabilities received
@@ -64,6 +76,9 @@ function CapabilityValidation(props) {
               break;
             case 'colorControl':
               colorControlValidationCallback();
+              break;
+            case 'colorTemperature':
+              colorTemperatureValidationCallback();
               break;
             default:
             console.log('Capability not supported.');
